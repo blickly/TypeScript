@@ -180,7 +180,7 @@ registerCodeFix({
 
         addCodeAction(addInlineTypeAssertion, fixes, context, TypePrintMode.Full, f => f.addInlineAssertion(context.span));
         addCodeAction(addInlineTypeAssertion, fixes, context, TypePrintMode.Relative, f => f.addInlineAssertion(context.span));
-        addCodeAction(addAnnotationFix, fixes, context, TypePrintMode.Widened, f => f.addInlineAssertion(context.span));
+        addCodeAction(addInlineTypeAssertion, fixes, context, TypePrintMode.Widened, f => f.addInlineAssertion(context.span));
 
         addCodeAction(extractExpression, fixes, context, TypePrintMode.Full, f => f.extractAsVariable(context.span));
 
