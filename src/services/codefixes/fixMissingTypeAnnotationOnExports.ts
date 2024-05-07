@@ -379,7 +379,7 @@ function withContext<T>(
                 sourceFile,
                 targetNode.end,
                 createAsExpression(
-                    getSynthesizedDeepClone(targetNode.name),
+                    factory.cloneNode(targetNode.name),
                     typeNode,
                 ),
                 {
@@ -392,7 +392,7 @@ function withContext<T>(
                 sourceFile,
                 targetNode,
                 createSatisfiesAsExpression(
-                    getSynthesizedDeepClone(targetNode),
+                    factory.cloneNode(targetNode),
                     typeNode,
                 ),
             );
@@ -899,7 +899,7 @@ function withContext<T>(
     }
 
     function createTypeOfFromEntityNameExpression(node: EntityNameExpression) {
-        return factory.createTypeQueryNode(getSynthesizedDeepClone(node) as EntityName);
+        return factory.createTypeQueryNode(factory.cloneNode(node) as EntityName);
     }
 
     function typeFromArraySpreadElements(
