@@ -1,0 +1,35 @@
+//// [tests/cases/compiler/decoratorMetadataTypeOnlyDefaultImportUnresolved.ts] ////
+
+=== decoratorMetadataTypeOnlyDefaultImportUnresolved.ts ===
+// A default type-only import of an unresolvable module must still be treated
+// as type-only: decorator metadata serializes it as `Object` instead of
+// referencing the elided import, and using it as a value reports TS1361.
+import type DefaultTypeOnly from 'unknown-module-default';
+>DefaultTypeOnly : any
+
+import { type NamedTypeOnly } from 'unknown-module-named';
+>NamedTypeOnly : any
+
+declare var Decorator: any;
+>Decorator : any
+
+class Foo {
+>Foo : Foo
+
+  @Decorator a?: DefaultTypeOnly;
+>Decorator : any
+>a : any
+
+  @Decorator b?: NamedTypeOnly;
+>Decorator : any
+>b : any
+}
+
+const x = DefaultTypeOnly;
+>x : any
+>DefaultTypeOnly : any
+
+const y = NamedTypeOnly;
+>y : any
+>NamedTypeOnly : any
+

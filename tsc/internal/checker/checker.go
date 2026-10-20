@@ -14815,6 +14815,7 @@ func (c *Checker) getTargetOfImportClause(node *ast.Node) *ast.Symbol {
 	if moduleSymbol != nil {
 		return c.getTargetOfModuleDefault(moduleSymbol, node, true /*dontResolveAlias*/)
 	}
+	c.markSymbolOfAliasDeclarationIfTypeOnly(node, nil)
 	return nil
 }
 

@@ -1,0 +1,33 @@
+decoratorMetadataTypeOnlyDefaultImportUnresolved.ts(4,34): error TS2307: Cannot find module 'unknown-module-default' or its corresponding type declarations.
+decoratorMetadataTypeOnlyDefaultImportUnresolved.ts(5,36): error TS2307: Cannot find module 'unknown-module-named' or its corresponding type declarations.
+decoratorMetadataTypeOnlyDefaultImportUnresolved.ts(14,11): error TS1361: 'DefaultTypeOnly' cannot be used as a value because it was imported using 'import type'.
+decoratorMetadataTypeOnlyDefaultImportUnresolved.ts(15,11): error TS1361: 'NamedTypeOnly' cannot be used as a value because it was imported using 'import type'.
+
+
+==== decoratorMetadataTypeOnlyDefaultImportUnresolved.ts (4 errors) ====
+    // A default type-only import of an unresolvable module must still be treated
+    // as type-only: decorator metadata serializes it as `Object` instead of
+    // referencing the elided import, and using it as a value reports TS1361.
+    import type DefaultTypeOnly from 'unknown-module-default';
+                                     ~~~~~~~~~~~~~~~~~~~~~~~~
+!!! error TS2307: Cannot find module 'unknown-module-default' or its corresponding type declarations.
+    import { type NamedTypeOnly } from 'unknown-module-named';
+                                       ~~~~~~~~~~~~~~~~~~~~~~
+!!! error TS2307: Cannot find module 'unknown-module-named' or its corresponding type declarations.
+    
+    declare var Decorator: any;
+    
+    class Foo {
+      @Decorator a?: DefaultTypeOnly;
+      @Decorator b?: NamedTypeOnly;
+    }
+    
+    const x = DefaultTypeOnly;
+              ~~~~~~~~~~~~~~~
+!!! error TS1361: 'DefaultTypeOnly' cannot be used as a value because it was imported using 'import type'.
+!!! related TS1376 decoratorMetadataTypeOnlyDefaultImportUnresolved.ts:4:8: 'DefaultTypeOnly' was imported here.
+    const y = NamedTypeOnly;
+              ~~~~~~~~~~~~~
+!!! error TS1361: 'NamedTypeOnly' cannot be used as a value because it was imported using 'import type'.
+!!! related TS1376 decoratorMetadataTypeOnlyDefaultImportUnresolved.ts:5:10: 'NamedTypeOnly' was imported here.
+    

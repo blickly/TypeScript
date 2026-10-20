@@ -1,0 +1,37 @@
+//// [tests/cases/compiler/decoratorMetadataTypeOnlyDefaultImportUnresolved.ts] ////
+
+=== decoratorMetadataTypeOnlyDefaultImportUnresolved.ts ===
+// A default type-only import of an unresolvable module must still be treated
+// as type-only: decorator metadata serializes it as `Object` instead of
+// referencing the elided import, and using it as a value reports TS1361.
+import type DefaultTypeOnly from 'unknown-module-default';
+>DefaultTypeOnly : Symbol(DefaultTypeOnly, Decl(decoratorMetadataTypeOnlyDefaultImportUnresolved.ts, 3, 6))
+
+import { type NamedTypeOnly } from 'unknown-module-named';
+>NamedTypeOnly : Symbol(NamedTypeOnly, Decl(decoratorMetadataTypeOnlyDefaultImportUnresolved.ts, 4, 8))
+
+declare var Decorator: any;
+>Decorator : Symbol(Decorator, Decl(decoratorMetadataTypeOnlyDefaultImportUnresolved.ts, 6, 11))
+
+class Foo {
+>Foo : Symbol(Foo, Decl(decoratorMetadataTypeOnlyDefaultImportUnresolved.ts, 6, 27))
+
+  @Decorator a?: DefaultTypeOnly;
+>Decorator : Symbol(Decorator, Decl(decoratorMetadataTypeOnlyDefaultImportUnresolved.ts, 6, 11))
+>a : Symbol(Foo.a, Decl(decoratorMetadataTypeOnlyDefaultImportUnresolved.ts, 8, 11))
+>DefaultTypeOnly : Symbol(DefaultTypeOnly, Decl(decoratorMetadataTypeOnlyDefaultImportUnresolved.ts, 3, 6))
+
+  @Decorator b?: NamedTypeOnly;
+>Decorator : Symbol(Decorator, Decl(decoratorMetadataTypeOnlyDefaultImportUnresolved.ts, 6, 11))
+>b : Symbol(Foo.b, Decl(decoratorMetadataTypeOnlyDefaultImportUnresolved.ts, 9, 33))
+>NamedTypeOnly : Symbol(NamedTypeOnly, Decl(decoratorMetadataTypeOnlyDefaultImportUnresolved.ts, 4, 8))
+}
+
+const x = DefaultTypeOnly;
+>x : Symbol(x, Decl(decoratorMetadataTypeOnlyDefaultImportUnresolved.ts, 13, 5))
+>DefaultTypeOnly : Symbol(DefaultTypeOnly, Decl(decoratorMetadataTypeOnlyDefaultImportUnresolved.ts, 3, 6))
+
+const y = NamedTypeOnly;
+>y : Symbol(y, Decl(decoratorMetadataTypeOnlyDefaultImportUnresolved.ts, 14, 5))
+>NamedTypeOnly : Symbol(NamedTypeOnly, Decl(decoratorMetadataTypeOnlyDefaultImportUnresolved.ts, 4, 8))
+
